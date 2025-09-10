@@ -1,6 +1,12 @@
 <section class="bg-main-light mx-auto my-3 w-75 rounded-3 shadow">
     <h1 class="h2 text-main text-center">Sign Up</h1>
 
+    @if (errorMsg != "") 
+    {
+    <div class="alert alert-danger text-center p-2 mx-3">
+        {{errorMsg}}
+    </div>
+    }
 <form class="p-3"  [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
     <div class="my-2">
         <label for="name" class="form-label">Full Name</label>
