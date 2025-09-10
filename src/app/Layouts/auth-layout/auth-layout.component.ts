@@ -5,7 +5,7 @@ import { FooterComponent } from '../../Components/footer/footer.component';
 
 @Component({
   selector: 'app-auth-layout',
-  imports: [NavAuthComponent, RouterOutlet, FooterComponent],
+  imports: [NavAuthComponent, RouterOutlet],
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.scss'
 })

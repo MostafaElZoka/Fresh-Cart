@@ -1,1 +1,97 @@
-<p>register works!</p>
+<section class="bg-main-light mx-auto my-3 w-75 rounded-3 shadow">
+    <h1 class="h2 text-main text-center">Sign Up</h1>
+
+<form class="p-3"  [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+    <div class="my-2">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="firstName" formControlName="name">
+        @if (registerForm.get('name')?.errors && registerForm.get('name')?.touched) 
+        {
+            <div class="alert alert-danger p-1 mt-1">
+                @if (registerForm.get('name')?.getError('required')) 
+                {
+                    <span>Name is required</span>
+                }
+                @if (registerForm.get('name')?.getError('minlength')) 
+                {
+                    <span>Name must be at least 3 characters</span>
+                }
+                @if (registerForm.get('name')?.getError('maxlength')) 
+                {
+                    <span>Name must not exceed 15 characters</span>
+                }
+            </div>
+        }
+    </div>
+    <div class="my-2">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+        @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) 
+        {
+            <div class="alert alert-danger p-1 mt-1">
+                @if (registerForm.get('email')?.getError('required')) 
+                {
+                    <span>Email is required</span>
+                }
+                @if (registerForm.get('email')?.getError('email')) 
+                {
+                    <span>Email format is invalid</span>
+                }
+            </div>
+        }
+    </div>
+    <div class="my-2">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password">
+        @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) 
+        {
+            <div class="alert alert-danger p-1 mt-1">
+                @if (registerForm.get('password')?.getError('required')) 
+                {
+                    <span>Password is required</span>
+                }
+                @if (registerForm.get('password')?.getError('pattern')) 
+                {
+                    <span>Password must contain at least 8 characters, including uppercase, lowercase, number, and special character</span>
+                }
+            </div>
+        }
+    </div>
+    <div class="my-2">
+        <label for="rePassword" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="rePassword" formControlName="rePassword">
+        @if ((registerForm.get('rePassword')?.errors || registerForm.getError('mismatched')) && registerForm.get('rePassword')?.touched) 
+        {
+            <div class="alert alert-danger p-1 mt-1">
+                @if (registerForm.get('rePassword')?.getError('required')) 
+                {
+                    <span>Confirm Password is required</span>
+                }
+                @if (registerForm.getError('mismatched')) 
+                {
+                    <span>Passwords do not match</span>
+                }
+            </div>
+        }
+    </div>
+    <div class="my-2">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="phone" formControlName="phone">
+        @if (registerForm.get('phone')?.errors && registerForm.get('phone')?.touched) 
+        {
+            <div class="alert alert-danger p-1 mt-1">
+                @if (registerForm.get('phone')?.getError('required')) 
+                {
+                    <span>Phone Number is required</span>
+                }
+                @if (registerForm.get('phone')?.getError('pattern')) 
+                {
+                    <span>Phone Number must be a valid 10-digit number</span>
+                }
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-main my-2">Register</button>
+</form>
+</section>
+

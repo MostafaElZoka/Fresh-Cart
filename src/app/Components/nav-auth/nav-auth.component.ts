@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-nav-auth',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './nav-auth.component.html',
   styleUrl: './nav-auth.component.scss'
 })
 export class NavAuthComponent {
-
+  @Input() LoggedIn!: boolean;
 }
