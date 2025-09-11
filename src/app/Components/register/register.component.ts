@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Core/Services/auth.service';
 import { NgClass } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { NgClass } from '@angular/common';
 })
 export class RegisterComponent {
   errorMsg:string = ''
-  constructor(private _authService:AuthService) { }
+  constructor(private _authService:AuthService, private _router:Router) { }
 
   registerForm = new FormGroup({
     name: new FormControl(null, [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
@@ -22,22 +23,28 @@ export class RegisterComponent {
   }, this.confirmPassword)
 
 
-  submitRegisterForm() {
+  submitRegisterForm() { //to submit the form
     if(this.registerForm.valid) {
       this._authService.register(this.registerForm.value).subscribe({
         next:(response)=>{
+          if(response.message == "success")
+          this._router.navigate(['/login']);
           console.log(response);
         },
+        //show error message from backend if any
         error:(err)=>{
           this.errorMsg = err.error.message
           console.log(err);
         }
       })
     }
+    else{ //to set all fields to touched if form is invalid
+      this.registerForm.markAllAsTouched();
+    }
   }
 
   confirmPassword(g:AbstractControl) 
-  {
+  { //to confirm that password and rePassword are the same using custom validator
     if(g.get('password')?.value === g.get('rePassword')?.value) {
       return null
     }

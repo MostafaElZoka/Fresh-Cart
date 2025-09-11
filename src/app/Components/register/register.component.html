@@ -78,7 +78,7 @@
             'is-invalid': (registerForm.get('rePassword')?.errors || registerForm.getError('mismatched')) && registerForm.get('rePassword')?.dirty,
             'is-valid': !registerForm.get('rePassword')?.errors && !registerForm.getError('mismatched') && registerForm.get('rePassword')?.dirty
         }" type="password" class="form-control" id="rePassword" formControlName="rePassword">
-        @if ((registerForm.get('rePassword')?.errors || registerForm.getError('mismatched')) && registerForm.get('rePassword')?.dirty) 
+        @if ((registerForm.get('rePassword')?.errors || registerForm.getError('mismatched')) && (registerForm.get('rePassword')?.touched ||registerForm.get('rePassword')?.dirty)) 
         {
             <div class="alert alert-danger p-1 mt-1">
                 @if (registerForm.get('rePassword')?.getError('required')) 
@@ -112,7 +112,7 @@
             </div>
         }
     </div>
-    <button type="submit" class="btn btn-main my-2">Register</button>
+    <button type="submit" class="btn btn-main my-2 d-block ms-auto">Register</button>
 </form>
 </section>
 

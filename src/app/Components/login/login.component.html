@@ -1,1 +1,53 @@
-<p>login works!</p>
+<section class="bg-main-light mx-auto my-3 w-75 rounded-3 shadow">
+    <h1 class="h2 text-main text-center">Sign Up</h1>
+
+    @if (errorMsg != "") 
+    {
+    <div class="alert alert-danger text-center p-2 mx-3">
+        {{errorMsg}}: incorrect email or password
+    </div>
+    }
+<form class="p-3"  [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+    <div class="my-2">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+        @if (loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)) 
+        {
+            <div class="alert alert-danger p-1 mt-1">
+                @if (loginForm.get('email')?.getError('required')) 
+                {
+                    <span>Email is required</span>
+                }
+                @if (loginForm.get('email')?.getError('email')) 
+                {
+                    <span>Email format is invalid</span>
+                }
+            </div>
+        }
+    </div>
+    <div class="my-2">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password">
+        @if (loginForm.get('password')?.errors && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)) 
+        {
+            <div class="alert alert-danger p-1 mt-1">
+                @if (loginForm.get('password')?.getError('required')) 
+                {
+                    <span>Password is required</span>
+                }
+                @if (loginForm.get('password')?.getError('pattern')) 
+                {
+                    <span>Password must contain at least 8 characters, including uppercase, lowercase, number, and special character</span>
+                }
+            </div>
+        }
+    </div>
+    <div class="text-center small">
+        <p>Don't have an account? Register here</p>
+        <button type="button" class="btn btn-main btn-sm my-2" routerLink="/register">Register</button>
+    </div>
+
+    <button type="submit" class="btn btn-main my-2">login</button>
+</form>
+</section>
+
