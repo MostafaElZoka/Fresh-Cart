@@ -1,10 +1,10 @@
 <section class="bg-main-light mx-auto my-3 w-75 rounded-3 shadow">
-    <h1 class="h2 text-main text-center">Sign Up</h1>
+    <h1 class="h2 text-main text-center">Login</h1>
 
     @if (errorMsg != "") 
     {
-    <div class="alert alert-danger text-center p-2 mx-3">
-        {{errorMsg}}: incorrect email or password
+    <div class="alert alert-danger text-center p-2 w-50 mx-auto">
+        {{errorMsg}} Please check your login info
     </div>
     }
 <form class="p-3"  [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
@@ -43,8 +43,9 @@
         }
     </div>
     <div class="text-center small">
-        <p>Don't have an account? Register here</p>
-        <button type="button" class="btn btn-main btn-sm my-2" routerLink="/register">Register</button>
+        <p>Don't have an account?
+             <a routerLink="/register" class="text-main text-decoration-underline">Register here</a>
+        </p>
     </div>
 
     <button type="submit" class="btn btn-main my-2">login</button>
