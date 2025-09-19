@@ -3,6 +3,7 @@ import { AuthLayoutComponent } from './Layouts/auth-layout/auth-layout.component
 import { BlankLayoutComponent } from './Layouts/blank-layout/blank-layout.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { LoginComponent } from './Components/login/login.component';
+import { authGuardGuard } from './Core/Guards/auth-guard.guard';
 
 export const routes: Routes = [
     {path:"", component:AuthLayoutComponent, 
@@ -12,7 +13,7 @@ export const routes: Routes = [
         {path:'register', loadComponent: () => import('./Components/register/register.component').then(m => m.RegisterComponent)},
     ]
     },
-    {path:"", component:BlankLayoutComponent, 
+    {path:"", component:BlankLayoutComponent, canActivate:[authGuardGuard],
         children:[
         {path:'', redirectTo:'home', pathMatch:'full'},
         {path:'home', loadComponent: () => import('./Components/home/home.component').then(m => m.HomeComponent)},

@@ -21,7 +21,16 @@ export class LoginComponent implements OnInit {
       this._authService.login(this.loginForm.value).subscribe({
         next:(response)=>{
           if(response.message == "success")
-          this._router.navigate(['/home']);
+          {
+            //store token in local storage
+            localStorage.setItem("userToken", response.token);
+            //decode token to get user data
+            this._authService.decodeToken();
+            //change isLoggedIn to true
+            
+            //navigate to home page
+            this._router.navigate(['/home']);
+          }
           console.log(response);
         },
         //show error message from backend if any
