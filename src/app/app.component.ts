@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./Components/footer/footer.component";
-import { NavBlankComponent } from "./Components/nav-blank/nav-blank.component";
 import { NavAuthComponent } from "./Components/nav-auth/nav-auth.component";
+import { AuthService } from './Core/Services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, NavBlankComponent, NavAuthComponent],
+  imports: [RouterOutlet, FooterComponent, NavAuthComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  constructor(private _authService:AuthService) {}
   title = 'FreshCart';
-  isLoggedIn = false;
+  // isLoggedIn = false;
+  //check if user is logged in on app load
+  ngOnInit(): void {
+  // this.isLoggedIn = this._authService.checkLogin();    
+  }
 }

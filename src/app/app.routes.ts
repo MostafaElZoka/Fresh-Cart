@@ -4,9 +4,11 @@ import { BlankLayoutComponent } from './Layouts/blank-layout/blank-layout.compon
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { LoginComponent } from './Components/login/login.component';
 import { authGuardGuard } from './Core/Guards/auth-guard.guard';
+import { guestGuard } from './Core/Guards/guest.guard';
 
 export const routes: Routes = [
-    {path:"", component:AuthLayoutComponent, 
+    {path:"", canActivate:[guestGuard] 
+        ,component:AuthLayoutComponent, 
         children:[
         {path:'', redirectTo:'login', pathMatch:'full'},
         {path:'login', component:LoginComponent},

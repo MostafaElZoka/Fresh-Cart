@@ -6,7 +6,7 @@ import { AuthService } from '../../Core/Services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,NgClass, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -26,8 +26,9 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("userToken", response.token);
             //decode token to get user data
             this._authService.decodeToken();
-            //change isLoggedIn to true
-            
+            //set isloggedIn to true
+            // this._authService.isloggedIn = true;
+            this._authService.setLoggedIn(true);
             //navigate to home page
             this._router.navigate(['/home']);
           }
