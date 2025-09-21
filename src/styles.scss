@@ -43,6 +43,15 @@ a:hover {
   overflow: hidden;
 }
 
+.product .btn-main{
+  transform: translateY(120%);
+}
+
+.product:hover .btn-main{
+  transform: translateY(0%);
+  transition: transform 0.5s;
+}
+
 .product:hover {
   box-shadow: 0 0 10px #11bd1168;
 }

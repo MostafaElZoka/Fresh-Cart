@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("userToken", response.token);
             //decode token to get user data
             this._authService.decodeToken();
-            //set isloggedIn to true
-            // this._authService.isloggedIn = true;
+            //set user login status to true
             this._authService.setLoggedIn(true);
             //navigate to home page
             this._router.navigate(['/home']);

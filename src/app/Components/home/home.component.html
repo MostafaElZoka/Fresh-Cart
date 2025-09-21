@@ -1,1 +1,29 @@
-<p>home works!</p>
+<section>
+    <h2 class="text-center">Popular Products</h2>
+    <div class="container-fluid">
+        <div class="row">
+                @for (product of productsList.slice(0,12); track product._id) 
+                {
+                <div class="col-md-2 mb-3">
+                <div class="border p-2 product">
+                    <img [src]="product.imageCover" class="img-fluid" alt="Product Image">
+                    <h3 class="small text-main">{{product.category.name}}</h3>
+                    <h4 class="h6">{{product.title.split(" ",3).join(" ")}}</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>{{product.price}} EGP</span>
+
+                        <div>
+                            <span> <i class="fas fa-star rating-color"></i></span>
+                            <span class="text-muted">({{product.ratingsAverage}})</span>
+                        </div>
+                    </div>
+                    <button class="btn-main w-100">Add To Cart</button>
+                </div>
+
+                </div>
+
+                }
+
+        </div>
+    </div>
+</section>

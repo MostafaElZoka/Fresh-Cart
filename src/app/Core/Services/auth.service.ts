@@ -59,7 +59,9 @@ export class AuthService {
         return false;
       }
     }
-    return true;
+    else{
+     return true;
+    }
     
   }
 
