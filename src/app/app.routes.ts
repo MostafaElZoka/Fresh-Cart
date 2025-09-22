@@ -5,6 +5,7 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { LoginComponent } from './Components/login/login.component';
 import { authGuardGuard } from './Core/Guards/auth-guard.guard';
 import { guestGuard } from './Core/Guards/guest.guard';
+import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 
 export const routes: Routes = [
     {path:"", canActivate:[guestGuard] 
@@ -13,6 +14,8 @@ export const routes: Routes = [
         {path:'', redirectTo:'login', pathMatch:'full'},
         {path:'login', component:LoginComponent},
         {path:'register', loadComponent: () => import('./Components/register/register.component').then(m => m.RegisterComponent)},
+        {path:'forgetPassword', component:ForgetPasswordComponent},
+
     ]
     },
     {path:"", component:BlankLayoutComponent, canActivate:[authGuardGuard],

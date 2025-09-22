@@ -80,4 +80,19 @@ export class AuthService {
     
 
   }
+
+  verifyEmail(data:any):Observable<any>
+  {
+    return this._httpclient.post(`${environment.baseUrl}/api/v1/auth/forgotPasswords`,data)
+  }
+
+  verifyOTP(data:any):Observable<any>
+  {
+    return this._httpclient.post(`${environment.baseUrl}/api/v1/auth/verifyResetCode`,data)
+  }
+
+  resetPassword(data:any):Observable<any>
+  {
+    return this._httpclient.put(`${environment.baseUrl}/api/v1/auth/resetPassword`,data)
+  }
 }
