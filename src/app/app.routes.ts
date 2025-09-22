@@ -22,8 +22,10 @@ export const routes: Routes = [
         {path:'brands', loadComponent: () => import('./Components/brands/brands.component').then(m => m.BrandsComponent)},
         {path:'categories', loadComponent: () => import('./Components/categories/categories.component').then(m => m.CategoriesComponent)},
         {path:'products', loadComponent: () => import('./Components/product/product.component').then(m => m.ProductComponent)},
-        {path:'cart', loadComponent: () => import('./Components/cart/cart.component').then(m => m.CartComponent)}
-]       
+        {path:'cart', loadComponent: () => import('./Components/cart/cart.component').then(m => m.CartComponent)},
+        {path:'details/:id', loadComponent: () => import('./Components/product-details/product-details.component').then(m => m.ProductDetailsComponent)}
+
+        ]       
     },
     {path:"**", component:NotFoundComponent}
 ];

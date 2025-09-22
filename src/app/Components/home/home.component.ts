@@ -5,10 +5,11 @@ import { IProduct } from '../../Core/Interfaces/iproduct';
 import { CategoryService } from '../../Core/Services/category.service';
 import { ICategory } from '../../Core/Interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselModule],
+  imports: [CarouselModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -18,6 +19,22 @@ export class HomeComponent implements OnInit, OnDestroy{
   categoriesList:ICategory[] = [];
 
   private productsSubscription:any;
+  
+  customOptions2: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    items: 1,
+    nav: true
+  }
+
     customOptions: OwlOptions = {
     loop: true,
     mouseDrag: false,
