@@ -1,11 +1,18 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import {BrowserAnimationsModule, provideAnimations} from '@angular/platform-browser/animations'
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withViewTransitions( /*so that routerLink and routerLinkActive transitions are smooth*/)),
-     provideClientHydration(withEventReplay()), provideHttpClient(withFetch())],
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideRouter(routes, withViewTransitions( /*so that routerLink and routerLinkActive transitions are smooth*/)),
+    provideClientHydration(withEventReplay()),
+    provideHttpClient(withFetch()),
+    // importProvidersFrom(BrowserAnimationsModule), 
+    provideAnimations() //to use angular material and other animation libraries like ngx-owl-carousel-o
+  ],
 };

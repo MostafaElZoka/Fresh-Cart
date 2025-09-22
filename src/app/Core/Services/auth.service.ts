@@ -12,8 +12,10 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   constructor(@Inject(PLATFORM_ID) private platformId:object ,private _httpclient:HttpClient, private _router:Router) { }
+
   private LoggedIn = new BehaviorSubject<boolean>(this.checkLogin());
   currentLoggedIn$ = this.LoggedIn.asObservable();
+  
   setLoggedIn(value:boolean)
   {
     this.LoggedIn.next(value);

@@ -1,3 +1,19 @@
+<section class="my-5">
+    <h2 class="text-center mb-5">Categories</h2>
+      <owl-carousel-o [options]="customOptions">
+        @for (category of categoriesList; track category._id) 
+        {
+            <ng-template carouselSlide [id]="category._id">
+                <div class="d-flex flex-column align-items-center">
+            <img [src]="category.image" [alt]="category.name" [title]="category.slug" class="img-fluid rounded-circle" style="width:150px; height:150px; object-fit:cover; cursor: pointer;">
+            <h3 class="h6 text-center text-main me-2 mt-2" style="cursor: pointer;">{{category.name}}</h3>
+                </div>
+
+            </ng-template>
+        }
+  </owl-carousel-o>
+</section>
+<!-- products -->
 <section>
     <h2 class="text-center">Popular Products</h2>
     <div class="container-fluid">
@@ -13,7 +29,15 @@
                         <span>{{product.price}} EGP</span>
 
                         <div>
-                            <span> <i class="fas fa-star rating-color"></i></span>
+                            @for (start of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index)
+                             {
+                                <span> <i class="fas fa-star rating-color"></i></span>
+                             }
+                             @if (product.ratingsAverage % 1 !== 0) 
+                             {
+                                <span> <i class="fas fa-star-half-alt rating-color"></i></span>
+                             }
+                            <!-- <span> <i class="fas fa-star rating-color"></i></span> -->
                             <span class="text-muted">({{product.ratingsAverage}})</span>
                         </div>
                     </div>
