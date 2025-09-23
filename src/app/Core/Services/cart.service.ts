@@ -23,4 +23,33 @@ export class CartService {
       headers: this.myHeaders.headers
     })
   }
+
+  getCartItems():Observable<any>{
+    return this._httpClient.get(`${environment.baseUrl}/api/v1/cart`,{
+      headers: this.myHeaders.headers
+    })
+  }
+
+  removeItemFromCart(id:string):Observable<any>{
+    return this._httpClient.delete(`${environment.baseUrl}/api/v1/cart/${id}`,{
+      headers: this.myHeaders.headers
+    })
+  }
+
+  changeItemCount(id:string,count:number):Observable<any>{
+    return this._httpClient.put(`${environment.baseUrl}/api/v1/cart/${id}`,
+      {
+        count: count
+      },
+      {
+        headers: this.myHeaders.headers
+      }
+    )
+  }
+
+  clearCart():Observable<any>{
+    return this._httpClient.delete(`${environment.baseUrl}/api/v1/cart`,{
+      headers: this.myHeaders.headers
+    })
+  }
 }

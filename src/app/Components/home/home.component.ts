@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../Core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../Core/Services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ import { CartService } from '../../Core/Services/cart.service';
 export class HomeComponent implements OnInit, OnDestroy{
   constructor(private _productService:ProductService,
               private _categoryService:CategoryService,
-              private _cartService:CartService    
+              private _cartService:CartService,
+              private _toastrService:ToastrService 
               ) { }
 
 
@@ -95,6 +97,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     this._cartService.addItemToCart(id).subscribe({
       next:(response) => {
         console.log(response);
+        this._toastrService.success("Item added to cart successfully","Success")
       },
       error:(err) => {
         console.log(err);

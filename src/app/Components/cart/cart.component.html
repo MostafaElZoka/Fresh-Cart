@@ -1,1 +1,42 @@
-<p>cart works!</p>
+<section class="bg-main-light shadow py-5 my-5 mx-auto w-75 rounded">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-center mb-3 h2">🛒 My Cart</h2>
+    <button class="btn btn-outline-danger btn-sm" (click)="clearCart()">Clear Cart</button>
+    </div>
+    <p class="text-center text-muted">
+      Total Price: <strong>{{ cartDetails.totalCartPrice | currency: "GBP" }}</strong>
+    </p>
+
+    @for (cartItem of cartDetails.products; track cartItem.product._id) {
+      <div class="row py-3 border-bottom align-items-center">
+        <!-- Product Image -->
+        <div class="col-3 col-md-2">
+          <img [src]="cartItem.product.imageCover"
+               [alt]="cartItem.product.title"
+               class="img-fluid rounded shadow-sm">
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-9 col-md-6">
+          <h3 class="h6 mb-1">{{ cartItem.product.title }}</h3>
+          <p class="text-main mb-2">Price: {{ cartItem.price | currency:"GBP" }}</p>
+          <button class="btn btn-sm btn-outline-danger" (click)="removeItem(cartItem.product._id)">
+            <i class="fa-solid fa-trash"></i> Remove Entierly
+          </button>
+        </div>
+
+        <!-- Quantity Controls -->
+        <div class="col-12 col-md-4 d-flex justify-content-md-end align-items-center mt-3 mt-md-0 gap-3">
+          <button class="btn btn-sm btn-outline-primary" (click)="incrementCount(cartItem.product._id, cartItem.count)">
+            <i class="fa-solid fa-circle-plus"></i>
+          </button>
+          <span class="fw-semibold">Qty: {{ cartItem.count }}</span>
+          <button class="btn btn-sm btn-outline-primary" (click)="decrementCount(cartItem.product._id, cartItem.count)" >
+            <i class="fa-solid fa-circle-minus"></i>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</section>
