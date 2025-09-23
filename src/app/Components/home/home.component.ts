@@ -8,6 +8,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../Core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../Core/Services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, OnDestroy{
-  constructor(private _productService:ProductService, private _categoryService:CategoryService) { }
+  constructor(private _productService:ProductService,
+              private _categoryService:CategoryService,
+              private _cartService:CartService    
+              ) { }
+
+
   productsList:IProduct[] = [];
   categoriesList:ICategory[] = [];
   searchText:string = '';
@@ -85,6 +91,17 @@ export class HomeComponent implements OnInit, OnDestroy{
       }
     })
   }
+  addToCart(id:string){
+    this._cartService.addItemToCart(id).subscribe({
+      next:(response) => {
+        console.log(response);
+      },
+      error:(err) => {
+        console.log(err);
+      }
+    })
+  }
+
   ngOnDestroy(): void {
     this.productsSubscription?.unsubscribe(); //to avoid memory leak
   }
