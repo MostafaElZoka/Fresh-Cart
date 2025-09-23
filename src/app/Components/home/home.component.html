@@ -53,9 +53,10 @@
 <!-- products -->
 <section>
     <h2 class="text-center mb-3">Popular Products</h2>
+    <input type="search" class="form-control w-50 mx-auto my-4" [(ngModel)]="searchText" placeholder="Search Products..." />
     <div class="container-fluid">
         <div class="row">
-                @for (product of productsList.slice(0,12); track product._id) 
+                @for (product of (productsList.slice(0,12) | search: searchText); track product._id) 
                 {
                 <div class="col-md-2 mb-3">
                 <div class="border p-2 product">
