@@ -19,21 +19,18 @@ export class CartService {
       {
         productId:id
       },
-    {
-      headers: this.myHeaders.headers
-    })
+    // {
+    //   headers: this.myHeaders.headers
+    // })
+    )
   }
 
   getCartItems():Observable<any>{
-    return this._httpClient.get(`${environment.baseUrl}/api/v1/cart`,{
-      headers: this.myHeaders.headers
-    })
+    return this._httpClient.get(`${environment.baseUrl}/api/v1/cart`)
   }
 
   removeItemFromCart(id:string):Observable<any>{
-    return this._httpClient.delete(`${environment.baseUrl}/api/v1/cart/${id}`,{
-      headers: this.myHeaders.headers
-    })
+    return this._httpClient.delete(`${environment.baseUrl}/api/v1/cart/${id}`)
   }
 
   changeItemCount(id:string,count:number):Observable<any>{
@@ -41,15 +38,13 @@ export class CartService {
       {
         count: count
       },
-      {
-        headers: this.myHeaders.headers
-      }
+      // {
+      //   headers: this.myHeaders.headers
+      // }
     )
   }
 
   clearCart():Observable<any>{
-    return this._httpClient.delete(`${environment.baseUrl}/api/v1/cart`,{
-      headers: this.myHeaders.headers
-    })
+    return this._httpClient.delete(`${environment.baseUrl}/api/v1/cart`)
   }
 }

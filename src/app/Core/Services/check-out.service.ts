@@ -15,19 +15,16 @@ export class CheckOutService {
   userId:any
   checkout(cartId:string, details:object):Observable<any>{
     return this._httpClient.post(`${environment.baseUrl}/api/v1/orders/checkout-session/${cartId}?url=${environment.serverUrl}`,
-      details,
-      {
-        headers: this.myHeaders
-      })
+      details,)
   }
 
   getUserOrderes():Observable<any>{
     this._authService.decodeToken();
     this.userId = this._authService.userData.id
     return this._httpClient.get(`${environment.baseUrl}/api/v1/orders/user/${this.userId}`,
-      {
-        headers: this.myHeaders
-      }
+      // {
+      //   headers: this.myHeaders
+      // }
     );
   }
 }
