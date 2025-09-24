@@ -10,6 +10,7 @@ import { SearchPipe } from '../../Core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../Core/Services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../Core/Services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   constructor(private _productService:ProductService,
               private _categoryService:CategoryService,
               private _cartService:CartService,
-              private _toastrService:ToastrService 
+              private _toastrService:ToastrService,
+              private _authService:AuthService
               ) { }
 
 
@@ -73,6 +75,10 @@ export class HomeComponent implements OnInit, OnDestroy{
     nav: true
   }
   ngOnInit(): void {
+    this._authService.decodeToken();
+    console.log(this._authService.userData);
+    console.log("asksakd");
+    
      this.productsSubscription = this._productService.getAllProducts().subscribe({ //to get all products
       next:(response) => {
         // console.log(response);

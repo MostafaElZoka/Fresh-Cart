@@ -22,7 +22,7 @@ export class AuthService {
   }
   // isloggedIn:boolean = false; //to track user login status
 
-  userDate:any//to store decoded user data from token
+  userData:any//to store decoded user data from token
 
   register(formData:any):Observable<any>
   {
@@ -41,8 +41,8 @@ export class AuthService {
       const token = localStorage.getItem("userToken");
       if(token !== null)
       {
-        this.userDate = jwtDecode(token);
-        console.log(this.userDate);
+        this.userData = jwtDecode(token);
+        console.log(this.userData);
       }
     }
   }
@@ -73,7 +73,7 @@ export class AuthService {
     // {
       localStorage.removeItem("userToken");
       this.setLoggedIn(false);
-      this.userDate = null;
+      this.userData = null;
       this._router.navigate(['/login']);
     // }
     console.log("logout");

@@ -1,0 +1,18 @@
+<section class="bg-main-light shadow py-5 my-5 mx-auto w-75 rounded">
+    <h2 class="text-center mb-4 h2">🛒 Order Information</h2>
+    <form [formGroup]="shippingAddress" class="container mx-auto w-50">
+        <div class="mb-3">
+            <label for="">Phone number</label>
+            <input type="text" formControlName="phone" class="form-control">
+        </div>
+        <div>
+            <label for="city">City</label>
+            <input type="text" formControlName="city" class="form-control">
+        </div>
+        <div>
+            <label for="etails">Receiver Name</label>
+            <input type="text" formControlName="details" class="form-control">
+        </div>
+        <button class="btn btn-main mt-3" (click)="confirmOrder()">Confirm Order</button>
+    </form>
+</section>
