@@ -8,14 +8,17 @@ import {BrowserAnimationsModule, provideAnimations} from '@angular/platform-brow
 import {provideToastr} from 'ngx-toastr'
 import { headerInterceptor } from './Core/Interceptors/header.interceptor';
 import { errorsInterceptor } from './Core/Interceptors/errors.interceptor';
+import {NgxSpinnerModule} from 'ngx-spinner'
+import { spinnerInterceptor } from './Core/Interceptors/spinner.interceptor';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes, withViewTransitions( /*so that routerLink and routerLinkActive transitions are smooth*/)),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([headerInterceptor,errorsInterceptor])),
-    // importProvidersFrom(BrowserAnimationsModule), 
+    provideHttpClient(withFetch(), withInterceptors([headerInterceptor,errorsInterceptor, spinnerInterceptor])),
+    importProvidersFrom(NgxSpinnerModule), 
     provideAnimations(), //to use angular material and other animation libraries like ngx-owl-carousel-o
     provideToastr(), // to use toastr notifications
   ],

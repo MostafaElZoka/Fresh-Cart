@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./Components/footer/footer.component";
 import { NavAuthComponent } from "./Components/nav-auth/nav-auth.component";
 import { AuthService } from './Core/Services/auth.service';
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, NavAuthComponent],
+  imports: [RouterOutlet, FooterComponent, NavAuthComponent, NgxSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
