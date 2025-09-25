@@ -1,1 +1,22 @@
-<p>categories works!</p>
+<section class="bg-main-light rounded mx-auto my-5 shadow py-5 w-75">
+    <h2 class="text-main text-center mb-4">Our Categories</h2>
+    <div class="container">
+    <div class="row g-4">
+      @for (category of categoryList; track category._id) {
+        <div class="col-md-4 col-sm-6">
+          <div class="card h-100 shadow-sm border-0">
+            <img 
+              [src]="category.image" 
+              [alt]="category.name" 
+              class="card-img-top img-fluid h-75"
+            >
+            <div class="card-body text-center">
+              <h5 class="card-title text-main">{{ category.name }}</h5>
+              <p class="text-muted mb-0">Slug: {{ category.slug }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { AuthLayoutComponent } from './Layouts/auth-layout/auth-layout.component';
-import { BlankLayoutComponent } from './Layouts/blank-layout/blank-layout.component';
-import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 import { LoginComponent } from './Components/login/login.component';
+import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { authGuardGuard } from './Core/Guards/auth-guard.guard';
 import { guestGuard } from './Core/Guards/guest.guard';
-import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
+import { AuthLayoutComponent } from './Layouts/auth-layout/auth-layout.component';
+import { BlankLayoutComponent } from './Layouts/blank-layout/blank-layout.component';
 
 export const routes: Routes = [
     {path:"", canActivate:[guestGuard] 
