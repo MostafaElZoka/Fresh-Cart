@@ -10,7 +10,7 @@ import { headerInterceptor } from './Core/Interceptors/header.interceptor';
 import { errorsInterceptor } from './Core/Interceptors/errors.interceptor';
 import {NgxSpinnerModule} from 'ngx-spinner'
 import { spinnerInterceptor } from './Core/Interceptors/spinner.interceptor';
-
+import {NgxPaginationModule} from 'ngx-pagination'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withViewTransitions( /*so that routerLink and routerLinkActive transitions are smooth*/)),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([headerInterceptor,errorsInterceptor, spinnerInterceptor])),
-    importProvidersFrom(NgxSpinnerModule), 
+    importProvidersFrom(NgxSpinnerModule, NgxPaginationModule), 
     provideAnimations(), //to use angular material and other animation libraries like ngx-owl-carousel-o
     provideToastr(), // to use toastr notifications
   ],
