@@ -1,19 +1,26 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Inject, inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../Environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor(private _httpClient:HttpClient) { }
-  myHeaders = {
-    headers: {
-      'token': localStorage.getItem("userToken") || ''
-    }
+  constructor(
+    private _httpClient: HttpClient) 
+  {
+    // if(isPlatformBrowser(platformId))
+    // {
+    // this.myHeaders =  {  headers: { 'token': localStorage.getItem("userToken") || '' }}
+    // }
   }
+  
+  // myHeaders = {  }
+  itemsCount= new BehaviorSubject<number>(0);
+  
   addItemToCart(id:string):Observable<any>{
     return this._httpClient.post(`${environment.baseUrl}/api/v1/cart`,
       {

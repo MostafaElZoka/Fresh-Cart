@@ -17,12 +17,19 @@ export class CartComponent implements OnInit {
   private readonly _cartService = inject(CartService);
   private readonly _toastr = inject(ToastrService);
   cartDetails:ICart = {} as ICart;
-
+  itemsQuantity =0;
   getCart(){
     this._cartService.getCartItems().subscribe({
       next:(response)=>{
         console.log(response.data);
         this.cartDetails = response.data;
+
+        this.itemsQuantity = this.cartDetails.products.reduce( (acc, item)=> {
+        return  acc + item.count
+        }, 0);
+
+
+        this._cartService.itemsCount.next(this.itemsQuantity);
       },
       error:(error)=>{
         console.log(error);
@@ -40,6 +47,8 @@ export class CartComponent implements OnInit {
         // this.getCart();// to refresh cart items after removing an item
         this.cartDetails = response.data; // update cart details directly from response
         this._toastr.success("Item removed from cart successfully");
+        this._cartService.itemsCount.next(response.numOfCartItems);
+
       },
       error:(error)=>{
         console.log(error);
@@ -53,7 +62,11 @@ export class CartComponent implements OnInit {
         console.log(response);
         // this.getCart();// to refresh cart items after changing count
         this.cartDetails = response.data; // update cart details directly from response
-        
+        this.itemsQuantity = this.cartDetails.products.reduce( (acc, item)=> {
+        return  acc + item.count
+        }, 0);
+        this._cartService.itemsCount.next(this.itemsQuantity);
+
       },
       error:(error)=>{
         console.log(error);
@@ -68,6 +81,11 @@ export class CartComponent implements OnInit {
           console.log(response);
           // this.getCart();// to refresh cart items after changing count
           this.cartDetails = response.data; // update cart details directly from response
+          this.itemsQuantity = this.cartDetails.products.reduce( (acc, item)=> {
+          return  acc + item.count
+            }, 0);
+          this._cartService.itemsCount.next(this.itemsQuantity);
+
         },
         error:(error)=>{
           console.log(error);
@@ -87,6 +105,8 @@ export class CartComponent implements OnInit {
           console.log(response);
           this.cartDetails = { } as ICart; // Clear cart details
           this._toastr.success("Cart cleared successfully");
+          this._cartService.itemsCount.next(0);
+
         },
         error:(error)=>{
           console.log(error);

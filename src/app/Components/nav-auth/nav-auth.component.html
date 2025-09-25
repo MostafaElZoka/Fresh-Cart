@@ -27,8 +27,9 @@
       </ng-container>
         <ul class="navbar-nav ms-auto cursor-pointer">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active-link" routerLink="cart">
-                <i class="fa-solid fa-cart-shopping"></i>
+              <a class="nav-link position-relative" routerLinkActive="active-link" routerLink="cart">
+                <i class="position-relative fa-solid fa-cart-shopping fa-2xl"></i>
+                <span class="badge position-absolute top-0 start-0" style="background-color: #11bd11;">{{cartItemsCount$ | async}}</span>
               </a>
             </li>
         <li class="nav-item">

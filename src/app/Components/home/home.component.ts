@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from '../../Core/Services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../Core/Services/auth.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   productsList:IProduct[] = [];
   categoriesList:ICategory[] = [];
   searchText:string = '';
-  private productsSubscription:any;
+  itemsQuantity =0;
+  private productsSubscription !:Subscription;
   
   customOptions2: OwlOptions = {
     loop: true,
@@ -99,14 +101,20 @@ export class HomeComponent implements OnInit, OnDestroy{
       }
     })
   }
-  addToCart(id:string){
+  addToCart(id:string){ 
     this._cartService.addItemToCart(id).subscribe({
       next:(response) => {
         console.log(response);
         this._toastrService.success("Item added to cart successfully","Success")
+        // this._cartService.itemsCount.next(response.numOfCartItems);//i am taking the count and adding it to the data stream        
+        this.itemsQuantity = response.data.products.reduce( (acc:number,prd:any) => {
+          return acc + prd.count
+        }, 0 )
+        this._cartService.itemsCount.next(this.itemsQuantity);
       },
       error:(err) => {
         console.log(err);
+        this._toastrService.error(err.error.message);
       }
     })
   }
