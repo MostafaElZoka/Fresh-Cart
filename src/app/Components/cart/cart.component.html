@@ -39,5 +39,5 @@
       </div>
     }
   </div>
-  <button class="btn btn-main mx-auto d-block" [disabled]="itemsQuantity==0" [routerLink]="['/orderInfo',cartDetails._id]">Check Out</button>
+  <button class="btn btn-main mx-auto d-block" [disabled]="(qtyStream|async)==0" [routerLink]="['/orderInfo',cartDetails._id]">Check Out</button>
 </section>

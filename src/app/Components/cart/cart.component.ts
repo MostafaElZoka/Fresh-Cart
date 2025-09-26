@@ -1,15 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../Core/Services/cart.service';
 import { ICart } from '../../Core/Interfaces/icart';
-import { CurrencyPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { response } from 'express';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
-  imports: [CurrencyPipe, FormsModule, RouterLink],
+  imports: [CurrencyPipe, FormsModule, RouterLink, AsyncPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
@@ -18,6 +19,7 @@ export class CartComponent implements OnInit {
   private readonly _toastr = inject(ToastrService);
   cartDetails:ICart = {} as ICart;
   itemsQuantity =0;
+  qtyStream! : Observable<any>
   getCart(){
     this._cartService.getCartItems().subscribe({
       next:(response)=>{
@@ -38,6 +40,8 @@ export class CartComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCart();
+    this.qtyStream = this._cartService.itemsCount.asObservable();
+
   }
 
   removeItem(id:string){
@@ -85,7 +89,6 @@ export class CartComponent implements OnInit {
           return  acc + item.count
             }, 0);
           this._cartService.itemsCount.next(this.itemsQuantity);
-
         },
         error:(error)=>{
           console.log(error);
@@ -94,6 +97,7 @@ export class CartComponent implements OnInit {
     }
     else{
       this.removeItem(id);
+
     }
   }
 
@@ -106,7 +110,6 @@ export class CartComponent implements OnInit {
           this.cartDetails = { } as ICart; // Clear cart details
           this._toastr.success("Cart cleared successfully");
           this._cartService.itemsCount.next(0);
-
         },
         error:(error)=>{
           console.log(error);
