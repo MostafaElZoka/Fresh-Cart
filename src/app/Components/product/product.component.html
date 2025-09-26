@@ -1,1 +1,38 @@
-<p>product works!</p>
+<section class="mt-2 mx-auto py-5">
+    <h2 class="text-main text-center">All Products</h2>
+    <input class="mx-auto w-50 form-control border-2" type="search" placeholder="search..." [(ngModel)]="searchText">
+    <div class="container-fluid">
+        <div class="row">
+            @for (product of (productsList |search:searchText); track product._id) 
+            {
+                <div class="col-md-2 my-4">
+                    <div class="border p-2 text-center product" style="cursor: pointer;">
+                        <div [routerLink]="['/details',product._id]" class="">
+                        <img [src]="product.imageCover" class="img-fluid h-75" alt="Product Image">
+                        <h3 class="small text-main mt-2">{{product.category.name}}</h3>
+                        <h4 class="h6">{{product.title.split(" ",3).join(" ")}}</h4>
+                        <div class="d-flex justify-content-between">
+                            <span>{{product.price}} EGP</span>
+                            <div class="d-flex">
+                                @for (item of [1,2,3,4,5].slice(0, product.ratingsAverage); track $index) 
+                                {
+                                    <span> <i class="fas fa-star rating-color"></i></span>
+                                }
+                                @if (product.ratingsAverage % 1 != 0) 
+                                {
+                                    <span> <i class="fas fa-star-half-alt rating-color"></i></span>
+
+                                }
+                                <span>({{product.ratingsAverage}})</span>
+                            </div>
+                        </div>
+                        </div>
+
+                        <button (click)="addItemToCart(product._id)" class="btn-main w-100">Add To Cart</button>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</section>
